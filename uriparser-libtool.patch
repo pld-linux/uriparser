@@ -1,0 +1,45 @@
+diff -urN uriparser-0.3.3.org/configure.in uriparser-0.3.3/configure.in
+--- uriparser-0.3.3.org/configure.in	2007-04-03 19:22:00.000000000 +0200
++++ uriparser-0.3.3/configure.in	2007-04-19 11:07:31.987494518 +0200
+@@ -6,7 +6,7 @@
+ 
+ AC_PROG_CC
+ AC_PROG_CXX
+-AC_PROG_RANLIB
++AC_PROG_LIBTOOL
+ AC_HEADER_STDC
+ 
+ 
+diff -urN uriparser-0.3.3.org/Makefile.am uriparser-0.3.3/Makefile.am
+--- uriparser-0.3.3.org/Makefile.am	2007-04-03 19:10:27.000000000 +0200
++++ uriparser-0.3.3/Makefile.am	2007-04-19 11:12:12.314735089 +0200
+@@ -1,7 +1,7 @@
+ ## Makefile.am
+ AUTOMAKE_OPTIONS = dist-zip dist-bzip2
+ 
+-lib_LIBRARIES = liburiparser.a
++lib_LTLIBRARIES = liburiparser.la
+ noinst_PROGRAMS = test/uriparser_test
+ TESTS = test/uriparser_test
+ 
+@@ -28,9 +28,9 @@
+ 
+ 
+ 
+-liburiparser_a_CFLAGS = -Iinclude
++liburiparser_la_CFLAGS = -Iinclude
+ 
+-liburiparser_a_SOURCES = \
++liburiparser_la_SOURCES = \
+ 	lib/Uri.c \
+ 	lib/UriBase.c \
+ 	lib/UriIp4.c \
+@@ -40,7 +40,7 @@
+ 
+ 
+ test_uriparser_test_CPPFLAGS = -Iinclude
+-test_uriparser_test_LDADD = -luriparser
++test_uriparser_test_LDADD = $(top_builddir)/liburiparser.la
+ test_uriparser_test_LDFLAGS = -L.
+ 
+ test_uriparser_test_SOURCES = \
