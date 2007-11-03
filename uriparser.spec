@@ -1,15 +1,15 @@
 Summary:	A strictly RFC 3986 compliant URI parsing library
 Summary(pl.UTF-8):	Biblioteka analizująca URI ściśle zgodne z RFC 3986
 Name:		uriparser
-Version:	0.5.2
+Version:	0.6.0
 Release:	1
 License:	BSD
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/uriparser/%{name}-%{version}.tar.gz
-# Source0-md5:	d2ce7c98001f61708e525e97663aa07a
+Source0:	http://dl.sourceforge.net/uriparser/%{name}-%{version}.tar.bz2
+# Source0-md5:	df649b55dc3808c2561271e55691a89c
 URL:		http://uriparser.sourceforge.net/
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -70,15 +70,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*.{htm,txt} AUTHORS ChangeLog
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%doc AUTHORS COPYING ChangeLog doc/*.{htm,txt}
+%attr(755,root,root) %{_libdir}/liburiparser.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/liburiparser.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/*.la
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/liburiparser.so
+%{_libdir}/liburiparser.la
+%{_includedir}/uriparser
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/liburiparser.a
