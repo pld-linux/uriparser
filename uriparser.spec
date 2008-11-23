@@ -31,7 +31,7 @@ Requires:	%{name} = %{version}-%{release}
 %description devel
 Header files for uriparser.
 
-%description devel -l pl.UTF_8
+%description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki uriparser.
 
 %package static
