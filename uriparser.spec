@@ -1,17 +1,24 @@
+# Conditional build
+%bcond_without  tests	# disable 'make check'
+#
 Summary:	A strictly RFC 3986 compliant URI parsing library
 Summary(pl.UTF-8):	Biblioteka analizująca URI ściśle zgodne z RFC 3986
 Name:		uriparser
-Version:	0.7.4
+Version:	0.7.5
 Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/uriparser/%{name}-%{version}.tar.lzma
-# Source0-md5:	d607001bff462361c7486ac677922141
+# Source0-md5:	a87b79caa1258cf9f232b55fce66ff22
 URL:		http://uriparser.sourceforge.net/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake >= 1:1.10.1
+%{?with_tests:BuildRequires:	cpptest-devel >= 1.1.0}
+BuildRequires:	doxygen
+BuildRequires:	graphviz-devel
 BuildRequires:	libtool
 BuildRequires:	lzma >= 1:4.42
+%{?with_tests:BuildRequires:	pkg-config >= 0.9.0}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -19,8 +26,8 @@ uriparser is a strictly RFC 3986 compliant URI parsing library.
 uriparser is cross-platform, fast, supports Unicode.
 
 %description -l pl.UTF-8
-uriparser to biblioteka analizująca URI ściśle zgodne z RFC 3986. Jest
-wieloplatformowa, szybka i obsługuje Unicode.
+uriparser to biblioteka analizująca URI ściśle zgodne z RFC 3986.
+Jest wieloplatformowa, szybka i obsługuje Unicode.
 
 %package devel
 Summary:	Header files for uriparser
@@ -50,13 +57,22 @@ Statyczna biblioteka uriparser.
 %setup -q -c -T
 lzma -dc %{SOURCE0} | tar xf - -C ..
 
+# configure first in doc, in order to create regular Doxyfile
+cd doc
+%{__libtoolize}
+%{__aclocal}
+%{__automake}
+%{__autoconf}
+%configure
+
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
-%{__autoheader}
+#%%{__autoheader}
 %{__autoconf}
-%configure
+%configure \
+	 %{!?with_tests:--disable-test}
 %{__make}
 
 %install
@@ -73,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog doc/*.{htm,txt}
+%doc AUTHORS COPYING ChangeLog doc/{*.{htm,txt},html}
 %attr(755,root,root) %{_libdir}/liburiparser.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/liburiparser.so.1
 
