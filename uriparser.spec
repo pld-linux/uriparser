@@ -18,7 +18,7 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz-devel
 BuildRequires:	libtool
 BuildRequires:	lzma >= 1:4.42
-%{?with_tests:BuildRequires:	pkg-config >= 0.9.0}
+BuildRequires:	pkg-config >= 0.9.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -98,6 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/liburiparser.so
 %{_libdir}/liburiparser.la
 %{_includedir}/uriparser
+%{_pkgconfigdir}/liburiparser.pc
 
 %files static
 %defattr(644,root,root,755)
