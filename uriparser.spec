@@ -1,3 +1,4 @@
+#
 # Conditional build
 %bcond_without  tests	# disable 'make check'
 #
@@ -18,7 +19,7 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz-devel
 BuildRequires:	libtool
 BuildRequires:	lzma >= 1:4.42
-BuildRequires:	pkg-config >= 0.9.0
+BuildRequires:	pkgconfig >= 0.9.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -57,6 +58,7 @@ Statyczna biblioteka uriparser.
 %setup -q -c -T
 lzma -dc %{SOURCE0} | tar xf - -C ..
 
+%build
 # configure first in doc, in order to create regular Doxyfile
 cd doc
 %{__libtoolize}
@@ -64,8 +66,7 @@ cd doc
 %{__automake}
 %{__autoconf}
 %configure
-
-%build
+cd ..
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
