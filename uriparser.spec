@@ -5,12 +5,12 @@
 Summary:	A strictly RFC 3986 compliant URI parsing library
 Summary(pl.UTF-8):	Biblioteka analizująca URI ściśle zgodne z RFC 3986
 Name:		uriparser
-Version:	0.7.5
+Version:	0.7.7
 Release:	1
 License:	BSD
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/uriparser/%{name}-%{version}.tar.lzma
-# Source0-md5:	a87b79caa1258cf9f232b55fce66ff22
+Source0:	http://downloads.sourceforge.net/uriparser/%{name}-%{version}.tar.bz2
+# Source0-md5:	2da950ef006be5a842dcc383cbbeaa78
 URL:		http://uriparser.sourceforge.net/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake >= 1:1.10.1
@@ -18,7 +18,6 @@ BuildRequires:	automake >= 1:1.10.1
 BuildRequires:	doxygen
 BuildRequires:	graphviz-devel
 BuildRequires:	libtool
-BuildRequires:	lzma >= 1:4.42
 BuildRequires:	pkgconfig >= 0.9.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -27,8 +26,8 @@ uriparser is a strictly RFC 3986 compliant URI parsing library.
 uriparser is cross-platform, fast, supports Unicode.
 
 %description -l pl.UTF-8
-uriparser to biblioteka analizująca URI ściśle zgodne z RFC 3986.
-Jest wieloplatformowa, szybka i obsługuje Unicode.
+uriparser to biblioteka analizująca URI ściśle zgodne z RFC 3986. Jest
+wieloplatformowa, szybka i obsługuje Unicode.
 
 %package devel
 Summary:	Header files for uriparser
@@ -55,18 +54,11 @@ Static uriparser library.
 Statyczna biblioteka uriparser.
 
 %prep
-%setup -q -c -T
-lzma -dc %{SOURCE0} | tar xf - -C ..
+%setup -q
+#lzma -dc %{SOURCE0} | tar xf - -C ..
 
 %build
 # configure first in doc, in order to create regular Doxyfile
-cd doc
-%{__libtoolize}
-%{__aclocal}
-%{__automake}
-%{__autoconf}
-%configure
-cd ..
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
