@@ -55,14 +55,11 @@ Statyczna biblioteka uriparser.
 
 %prep
 %setup -q
-#lzma -dc %{SOURCE0} | tar xf - -C ..
 
 %build
-# configure first in doc, in order to create regular Doxyfile
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
-#%%{__autoheader}
 %{__autoconf}
 %configure \
 	 %{!?with_tests:--disable-test}
