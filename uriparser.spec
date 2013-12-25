@@ -16,9 +16,10 @@ BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake >= 1:1.10.1
 %{?with_tests:BuildRequires:	cpptest-devel >= 1.1.0}
 BuildRequires:	doxygen
-BuildRequires:	graphviz-devel
-BuildRequires:	libtool
-BuildRequires:	pkgconfig >= 0.9.0
+BuildRequires:	graphviz
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool >= 2:1.5
+BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
