@@ -1,5 +1,6 @@
 #
 # Conditional build
+%bcond_without  doc	# disable generated documentation
 %bcond_without  tests	# disable 'make check'
 #
 Summary:	A strictly RFC 3986 compliant URI parsing library
@@ -15,8 +16,10 @@ URL:		http://uriparser.sourceforge.net/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake >= 1:1.10.1
 %{?with_tests:BuildRequires:	cpptest-devel >= 1.1.0}
+%if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
+%endif
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig >= 1:0.9.0
@@ -63,6 +66,7 @@ Statyczna biblioteka uriparser.
 %{__automake}
 %{__autoconf}
 %configure \
+	 %{!?with_doc:--disable-doc} \
 	 %{!?with_tests:--disable-test}
 %{__make}
 
@@ -72,8 +76,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with doc}
 # packaged as %doc
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/uriparser
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -83,13 +89,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog doc/{*.{htm,txt},html}
+%doc AUTHORS COPYING ChangeLog doc/*.{htm,txt}
 %attr(755,root,root) %{_bindir}/uriparse
 %attr(755,root,root) %{_libdir}/liburiparser.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/liburiparser.so.1
 
 %files devel
 %defattr(644,root,root,755)
+%if %{with doc}
+%doc doc/html
+%endif
 %attr(755,root,root) %{_libdir}/liburiparser.so
 %{_libdir}/liburiparser.la
 %{_includedir}/uriparser
