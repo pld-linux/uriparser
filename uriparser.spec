@@ -6,12 +6,12 @@
 Summary:	A strictly RFC 3986 compliant URI parsing library
 Summary(pl.UTF-8):	Biblioteka analizująca URI ściśle zgodne z RFC 3986
 Name:		uriparser
-Version:	0.8.0
+Version:	0.8.1
 Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/uriparser/%{name}-%{version}.tar.bz2
-# Source0-md5:	77601f52ab91c0e100fc5d783d9c1ee5
+# Source0-md5:	4e4c5f0ee6abb111a431c45e144247aa
 URL:		http://uriparser.sourceforge.net/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake >= 1:1.10.1
@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog doc/*.{htm,txt}
+%doc AUTHORS COPYING ChangeLog
 %attr(755,root,root) %{_bindir}/uriparse
 %attr(755,root,root) %{_libdir}/liburiparser.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/liburiparser.so.1
