@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog
+%doc AUTHORS COPYING ChangeLog THANKS
 %attr(755,root,root) %{_bindir}/uriparse
 %attr(755,root,root) %{_libdir}/liburiparser.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/liburiparser.so.1
