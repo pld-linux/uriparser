@@ -1,0 +1,16 @@
+--- uriparser-0.8.4/doc/Makefile.am.orig	2014-11-21 17:50:52.000000000 +0100
++++ uriparser-0.8.4/doc/Makefile.am	2015-10-20 22:40:34.331457086 +0200
+@@ -23,9 +23,11 @@
+ 
+ ## Install doc files
+ install-data-local:
+-	$(MKDIR_P) "$(DESTDIR)$(docdir)/html/search"  ## Didn't work with installdirs-local
++	$(MKDIR_P) "$(DESTDIR)$(docdir)/html"  ## Didn't work with installdirs-local
+ 	$(INSTALL_DATA) html/*.css html/*.html html/*.js html/*.map html/*.md5 html/*.png "$(DESTDIR)$(docdir)/html/"
+-	$(INSTALL_DATA) html/search/* "$(DESTDIR)$(docdir)/html/search/"
++	if test -d html/search ; then \
++	$(MKDIR_P) "$(DESTDIR)$(docdir)/html/search" \
++	$(INSTALL_DATA) html/search/* "$(DESTDIR)$(docdir)/html/search/" ; fi
+ 	-$(INSTALL_DATA) *.qch "$(DESTDIR)$(docdir)/"
+ 
+ 
