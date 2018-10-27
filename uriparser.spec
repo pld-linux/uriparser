@@ -6,24 +6,24 @@
 Summary:	A strictly RFC 3986 compliant URI parsing library
 Summary(pl.UTF-8):	Biblioteka analizująca URI ściśle zgodne z RFC 3986
 Name:		uriparser
-Version:	0.8.6
+Version:	0.9.0
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/uriparser/uriparser/releases
 Source0:	https://github.com/uriparser/uriparser/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	ce2507966df78e36ccf71782fc598a59
+# Source0-md5:	16452063f65826f8d1b5fc3b13e71d3a
 Patch0:		%{name}-doxygen.patch
 URL:		https://uriparser.github.io/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake >= 1:1.10.1
-%{?with_tests:BuildRequires:	cpptest-devel >= 1.1.0}
+%{?with_tests:BuildRequires:	gtest-devel >= 1.8.1-3}
 %if %{with doc}
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.5
+BuildRequires:	libtool >= 2:2
 BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -67,6 +67,7 @@ Statyczna biblioteka uriparser.
 %{__libtoolize}
 %{__aclocal}
 %{__automake}
+%{__autoheader}
 %{__autoconf}
 %configure \
 	 %{!?with_doc:--disable-doc} \
