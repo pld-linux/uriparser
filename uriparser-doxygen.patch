@@ -1,16 +1,27 @@
---- uriparser-0.8.5/doc/Makefile.am.orig	2018-02-10 08:58:51.675192042 +0100
-+++ uriparser-0.8.5/doc/Makefile.am	2018-02-10 09:00:28.205190940 +0100
-@@ -23,9 +23,11 @@
+--- uriparser-0.9.3/CMakeLists.txt.orig	2019-04-28 14:04:25.000000000 +0200
++++ uriparser-0.9.3/CMakeLists.txt	2019-04-28 16:00:52.723819252 +0200
+@@ -292,24 +292,10 @@
+ #
+ if(URIPARSER_BUILD_DOCS)
+     find_package(Doxygen REQUIRED dot doxygen)
+-    find_program(QHG_LOCATION
+-        NAMES
+-            qhelpgenerator
+-            qhelpgenerator-qt5  # e.g. CentOS 7
+-    )
+-    include(FindHTMLHelp)
  
- ## Install doc files
- install-data-local:
--	$(MKDIR_P) "$(DESTDIR)$(docdir)/html/search"  ## Didn't work with installdirs-local
-+	$(MKDIR_P) "$(DESTDIR)$(docdir)/html"  ## Didn't work with installdirs-local
- 	$(INSTALL_DATA) html/*.css html/*.html html/*.js html/*.md5 html/*.png "$(DESTDIR)$(docdir)/html/"
--	$(INSTALL_DATA) html/search/* "$(DESTDIR)$(docdir)/html/search/"
-+	if test -d html/search ; then \
-+	$(MKDIR_P) "$(DESTDIR)$(docdir)/html/search" ; \
-+	$(INSTALL_DATA) html/search/* "$(DESTDIR)$(docdir)/html/search/" ; fi
- 	-$(INSTALL_DATA) *.qch "$(DESTDIR)$(docdir)/"
- 
+     # Generate Doxyfile
+-    if(HTML_HELP_COMPILER)
+-        set(GENERATE_HTMLHELP YES)
+-    else()
+         set(GENERATE_HTMLHELP NO)
+-    endif()
+-    if(QHG_LOCATION)
+-        set(GENERATE_QHP YES)
+-    else()
+         set(GENERATE_QHP NO)
+-    endif()
+     configure_file(doc/Doxyfile.in doc/Doxyfile @ONLY)
+     configure_file(doc/release.sh.in doc/release.sh @ONLY)
  
