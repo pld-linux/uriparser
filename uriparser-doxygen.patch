@@ -1,16 +1,24 @@
---- uriparser-0.9.3/CMakeLists.txt.orig	2019-04-28 14:04:25.000000000 +0200
-+++ uriparser-0.9.3/CMakeLists.txt	2019-04-28 16:00:52.723819252 +0200
-@@ -292,24 +292,10 @@
- #
+--- uriparser-0.9.5/CMakeLists.txt.orig	2021-03-25 21:34:06.679372459 +0100
++++ uriparser-0.9.5/CMakeLists.txt	2021-03-25 21:35:30.585584567 +0100
+@@ -327,32 +327,9 @@
  if(URIPARSER_BUILD_DOCS)
      find_package(Doxygen REQUIRED dot doxygen)
--    find_program(QHG_LOCATION
--        NAMES
--            qhelpgenerator
--            qhelpgenerator-qt5  # e.g. CentOS 7
--    )
--    include(FindHTMLHelp)
  
+-    set(QHG_LOCATION "" CACHE FILEPATH "Path to qhelpgenerator program (default: auto-detect)")
+-    if(NOT QHG_LOCATION)
+-        find_package(Qt5Help QUIET)
+-        if(TARGET Qt5::qhelpgenerator)
+-            get_target_property(QHG_LOCATION Qt5::qhelpgenerator LOCATION)
+-            mark_as_advanced(Qt5Core_DIR)
+-            mark_as_advanced(Qt5Gui_DIR)
+-            mark_as_advanced(Qt5Help_DIR)
+-            mark_as_advanced(Qt5Sql_DIR)
+-            mark_as_advanced(Qt5Widgets_DIR)
+-        endif()
+-    endif()
+-
+-    include(FindHTMLHelp)
+-
      # Generate Doxyfile
 -    if(HTML_HELP_COMPILER)
 -        set(GENERATE_HTMLHELP YES)
@@ -22,6 +30,21 @@
 -    else()
          set(GENERATE_QHP NO)
 -    endif()
-     configure_file(doc/Doxyfile.in doc/Doxyfile @ONLY)
-     configure_file(doc/release.sh.in doc/release.sh @ONLY)
+     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in doc/Doxyfile @ONLY)
+     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doc/release.sh.in doc/release.sh @ONLY)
  
+@@ -374,14 +351,6 @@
+         DESTINATION
+             ${CMAKE_INSTALL_DOCDIR}
+     )
+-    if(QHG_LOCATION)
+-        uriparser_install(
+-            FILES
+-                ${CMAKE_CURRENT_BINARY_DIR}/doc/uriparser-${PROJECT_VERSION}.qch
+-            DESTINATION
+-                ${CMAKE_INSTALL_DOCDIR}
+-        )
+-    endif()
+ endif()
+ 
+ #
