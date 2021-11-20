@@ -8,7 +8,7 @@ Summary:	A strictly RFC 3986 compliant URI parsing library
 Summary(pl.UTF-8):	Biblioteka analizująca URI ściśle zgodne z RFC 3986
 Name:		uriparser
 Version:	0.9.5
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/uriparser/uriparser/releases
