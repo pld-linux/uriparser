@@ -23,6 +23,7 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 BuildRequires:	libstdc++-devel
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
