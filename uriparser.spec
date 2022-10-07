@@ -23,6 +23,7 @@ BuildRequires:	doxygen
 BuildRequires:	graphviz
 %endif
 BuildRequires:	libstdc++-devel
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -57,6 +58,18 @@ Static uriparser library.
 
 %description static -l pl.UTF-8
 Statyczna biblioteka uriparser.
+
+%package apidocs
+Summary:	API documentation for uriparser library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki uriparser
+Group:		Documentation
+BuildArch:	noarch
+
+%description apidocs
+API documentation for uriparser library.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki uriparser.
 
 %prep
 %setup -q
@@ -115,9 +128,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%if %{with doc}
-%doc build/doc/html/*
-%endif
 %attr(755,root,root) %{_libdir}/liburiparser.so
 %{_includedir}/uriparser
 %{_libdir}/cmake/uriparser-%{version}
@@ -127,4 +137,10 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/liburiparser.a
+%endif
+
+%if %{with doc}
+%files apidocs
+%defattr(644,root,root,755)
+%doc build/doc/html/{search,*.css,*.html,*.js,*.png}
 %endif
