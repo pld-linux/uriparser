@@ -7,13 +7,13 @@
 Summary:	A strictly RFC 3986 compliant URI parsing library
 Summary(pl.UTF-8):	Biblioteka analizująca URI ściśle zgodne z RFC 3986
 Name:		uriparser
-Version:	1.0.1
+Version:	1.0.2
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/uriparser/uriparser/releases
 Source0:	https://github.com/uriparser/uriparser/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	11f16e326ada85c1d37c9c159f5eec62
+# Source0-md5:	ed4faef75171f56664c9fc6ac9dbd7c2
 Patch0:		%{name}-doxygen.patch
 URL:		https://uriparser.github.io/
 BuildRequires:	cmake >= 3.15.0
